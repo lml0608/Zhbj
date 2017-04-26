@@ -1,0 +1,26 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <!-- 是否允许有标题栏 -->
+        <!--<item name="windowNoTitle">true</item>-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Theme.AppCompat.Light.NoActionBar.FullScreen. -->
+    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light">
+        <!-- Customize your theme here. -->
+        <!-- 是否允许有标题栏 -->
+        <item name="windowNoTitle">true</item>
+        <!--是否打开ActionBar-->
+        <item name="windowActionBar">false</item>
+        <!--是否全屏-->
+        <item name="android:windowFullscreen">true</item>
+        <!--设置窗体内容背景-->
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+</resources>
