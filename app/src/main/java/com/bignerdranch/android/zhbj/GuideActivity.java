@@ -1,5 +1,6 @@
 package com.bignerdranch.android.zhbj;
 
+import android.content.Intent;
 import android.media.Image;
 import android.nfc.Tag;
 import android.support.v4.view.PagerAdapter;
@@ -15,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+
+import com.bignerdranch.android.zhbj.utils.PrefUtils;
 
 import java.util.ArrayList;
 
@@ -110,6 +113,22 @@ public class GuideActivity extends AppCompatActivity {
                 mPointDis = mLinearLayout.getChildAt(1).getLeft() - mLinearLayout.getChildAt(0).getLeft();
 
                 Log.i(TAG, String.valueOf(mPointDis));
+            }
+        });
+
+
+        mStartButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //保存是否第一次进入应用
+                PrefUtils.putStoryEnter(getApplicationContext(), false);
+                Log.i(TAG, String.valueOf(PrefUtils.getStoryEnter(getApplicationContext())));
+                Intent intent = new Intent(GuideActivity.this, MainActivity.class);
+
+                startActivity(intent);
+
+                finish();
             }
         });
 

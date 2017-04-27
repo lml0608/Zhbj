@@ -18,11 +18,6 @@ public class SplashActivity extends AppCompatActivity {
 
     private static final String TAG = "SplashActivity";
 
-    /**
-     * 是否第一次进入应用
-     */
-    private static final String IS_FIRST_ENTER = "is_first_enter";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
                 //否则跳进主页
                 //获取SharedPreferences对象三种方法
                 //参数1。文件名，2。操作模式
-                SharedPreferences prefs = getSharedPreferences("config", MODE_PRIVATE);
+                //SharedPreferences prefs = getSharedPreferences("config", MODE_PRIVATE);
                 //参数1。操作模式，该方法使用当前活动的类名作为文件名
                 //SharedPreferences pref = getPreferences(MODE_PRIVATE);
                 //1.参数 Context
@@ -82,7 +77,7 @@ public class SplashActivity extends AppCompatActivity {
                 /*是否第一次进入*/
                 //boolean isFirstEnter = prefs.getBoolean(IS_FIRST_ENTER, true);
                 Intent mIntent;
-                boolean isFirstEnter = PrefUtils.getBoolean(getApplicationContext(), IS_FIRST_ENTER, true);
+                boolean isFirstEnter = PrefUtils.getStoryEnter(getApplicationContext());
                 Log.i(TAG, String.valueOf(isFirstEnter));
                 if (isFirstEnter) {
                     //新手引导
