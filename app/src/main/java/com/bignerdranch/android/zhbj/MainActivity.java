@@ -1,10 +1,14 @@
 package com.bignerdranch.android.zhbj;
 
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
 
+import com.bignerdranch.android.zhbj.fragment.ContentFragment;
+import com.bignerdranch.android.zhbj.fragment.LeftMenuFragment;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
@@ -14,6 +18,8 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class MainActivity extends SlidingFragmentActivity {
 
     private static final String TAG = "MainActivity";
+    private SlidingMenu mSlidingMenu;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,13 +27,40 @@ public class MainActivity extends SlidingFragmentActivity {
         //去掉标题栏。,在setContentView(R.layout.activity_guide);之前调用
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_fragment);
 
+
+        //侧边栏
         setBehindContentView(R.layout.left_menu);
-        SlidingMenu slidingMenu = getSlidingMenu();
-        slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        mSlidingMenu = getSlidingMenu();
+        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
-        slidingMenu.setBehindOffset(500);//屏幕预留200像素宽度
+        mSlidingMenu.setBehindOffset(500);//屏幕预留500像素宽度
+
+        initFrtagment();
+
+    }
+
+    private void setSlidingMenuEnable(boolean enable) {
+
+        if (enable) {
+            mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        } else {
+            mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+        }
+    }
+
+
+
+    private void initFrtagment() {
+
+        //获取FragmentManager
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
+        fragmentTransaction.replace(R.id.fl_left_menu, new LeftMenuFragment());
+        fragmentTransaction.replace(R.id.fragment_container, new ContentFragment());
+        fragmentTransaction.commit();
+
 
     }
 }

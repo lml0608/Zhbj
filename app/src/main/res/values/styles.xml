@@ -23,4 +23,28 @@
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
+    <!--<RadioButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:button="@null"-->
+        <!--android:drawablePadding="3dp"-->
+        <!--android:drawableTop="@drawable/home"-->
+        <!--android:padding="5dp"-->
+        <!--android:text="首页"-->
+        <!--android:textColor="#fff"/>-->
+
+    <style name="Botton_Tab_Style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:button">@null</item>
+        <item name="android:drawablePadding">3dp</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColor">@color/txt_tab_selector</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>
