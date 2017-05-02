@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioGroup;
 
+import com.bignerdranch.android.zhbj.MainActivity;
 import com.bignerdranch.android.zhbj.R;
 import com.bignerdranch.android.zhbj.base.BasePager;
 import com.bignerdranch.android.zhbj.base.impl.GovAffairsPager;
@@ -15,6 +16,7 @@ import com.bignerdranch.android.zhbj.base.impl.NewsCenterPager;
 import com.bignerdranch.android.zhbj.base.impl.SettingPager;
 import com.bignerdranch.android.zhbj.base.impl.SmartServicePager;
 import com.bignerdranch.android.zhbj.view.NoScrollViewPager;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +108,16 @@ public class ContentFragment extends BaseFragment {
                 BasePager pager = mBasePagers.get(position);
                 pager.initData();
 
+                if (position == 0 || position == mBasePagers.size() - 1) {
+                    //首页和设置页要禁用侧边栏
+                    setSlidingMenuEnable(false);
+
+                } else {
+                    //其他页面开去侧边栏
+                    setSlidingMenuEnable(true);
+
+                }
+
             }
 
             @Override
@@ -117,6 +129,28 @@ public class ContentFragment extends BaseFragment {
 
         //加载默认选中的页面数据（首页）
         mBasePagers.get(0).initData();
+        //第一页禁用侧边栏
+        setSlidingMenuEnable(false);
+
+    }
+
+    /**
+     *
+     * 开启和禁用侧边栏
+     * @param enable
+     */
+    private void setSlidingMenuEnable(boolean enable) {
+
+        MainActivity mainUI = (MainActivity) getActivity();
+
+        SlidingMenu slidingMenu = mainUI.getSlidingMenu();
+
+        if (enable) {
+
+            slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        } else {
+            slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
+        }
 
     }
 

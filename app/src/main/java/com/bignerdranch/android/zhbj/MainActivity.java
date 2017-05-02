@@ -33,6 +33,7 @@ public class MainActivity extends SlidingFragmentActivity {
         //侧边栏
         setBehindContentView(R.layout.left_menu);
         mSlidingMenu = getSlidingMenu();
+        //触摸模式TOUCHMODE_FULLSCREEN 全屏,TOUCHMODE_MARGIN边界
         mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
         mSlidingMenu.setBehindOffset(500);//屏幕预留500像素宽度
@@ -41,14 +42,6 @@ public class MainActivity extends SlidingFragmentActivity {
 
     }
 
-    private void setSlidingMenuEnable(boolean enable) {
-
-        if (enable) {
-            mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
-        } else {
-            mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
-        }
-    }
 
 
 
