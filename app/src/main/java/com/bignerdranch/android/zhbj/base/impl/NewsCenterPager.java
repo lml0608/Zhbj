@@ -32,5 +32,8 @@ public class NewsCenterPager extends BasePager {
         //显示菜单按钮
         mImageButton.setVisibility(View.VISIBLE);
 
+
+        //请求服务器，获取数据
+
     }
 }
