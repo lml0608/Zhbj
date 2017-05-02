@@ -18,6 +18,8 @@ public class PrefUtils {
     private static final String IS_FIRST_ENTER = "is_first_enter";
 
 
+
+
     //boolean
     public static boolean getStoryEnter(Context context) {
 
@@ -34,23 +36,21 @@ public class PrefUtils {
                 .commit();
     }
 
-//    //String
-//    public static String getString(Context context, String key, String defValue) {
-//
-//
-//        sPrefs = context.getSharedPreferences("config", MODE_PRIVATE);
-//
-//        return sPrefs.getString(key, defValue);
-//    }
-//
-//    public static void putString(Context context, String key, String defValue) {
-//
-//
-//        sPrefs = context.getSharedPreferences("config", MODE_PRIVATE);
-//
-//        sPrefs.edit().putString(key, defValue);
-//    }
-//
+    //String
+    public static String getCache(Context context, String key) {
+
+        return PreferenceManager.getDefaultSharedPreferences(context)
+                .getString(key, "");
+    }
+
+    public static void setCache(Context context, String key, String defValue) {
+
+
+        PreferenceManager.getDefaultSharedPreferences(context)
+                .edit()
+                .putString(key, defValue)
+                .commit();
+    }
 //    //int
 //
 //
@@ -69,7 +69,6 @@ public class PrefUtils {
 //
 //        sPrefs.edit().putInt(key, defValue);
 //    }
-
 
 
 }

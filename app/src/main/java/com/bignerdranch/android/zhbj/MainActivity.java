@@ -20,6 +20,9 @@ public class MainActivity extends SlidingFragmentActivity {
     private static final String TAG = "MainActivity";
     private SlidingMenu mSlidingMenu;
 
+    private static final String TAG_LEFT_MENU = "TAG_LEFT_MENU";
+    private static final String TAG_CONTENT = "TAG_CONTENT";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,10 +53,27 @@ public class MainActivity extends SlidingFragmentActivity {
         //获取FragmentManager
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
-        fragmentTransaction.replace(R.id.fl_left_menu, new LeftMenuFragment());
-        fragmentTransaction.replace(R.id.fragment_container, new ContentFragment());
+        fragmentTransaction.replace(R.id.fl_left_menu, new LeftMenuFragment(), TAG_LEFT_MENU);
+        fragmentTransaction.replace(R.id.fragment_container, new ContentFragment(), TAG_CONTENT);
         fragmentTransaction.commit();
 
 
+    }
+
+
+    // 获取侧边栏fragment对象
+    public LeftMenuFragment getLeftMenuFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        LeftMenuFragment fragment = (LeftMenuFragment) fm
+                .findFragmentByTag(TAG_LEFT_MENU);// 根据标记找到对应的fragment
+        return fragment;
+    }
+
+    // 获取主页fragment对象
+    public ContentFragment getContentFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        ContentFragment fragment = (ContentFragment) fm
+                .findFragmentByTag(TAG_CONTENT);// 根据标记找到对应的fragment
+        return fragment;
     }
 }
