@@ -3,6 +3,7 @@ package com.bignerdranch.android.zhbj.base.impl;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bignerdranch.android.zhbj.base.BasePager;
@@ -20,6 +21,7 @@ public class HomePager extends BasePager {
 
     @Override
     public void initData() {
+        //首页初始化
         TextView view = new TextView(mActivity);
         view.setText("首页");
         view.setTextColor(Color.RED);
@@ -29,6 +31,9 @@ public class HomePager extends BasePager {
         mFrameLayout.addView(view);
 
         mTextView.setText("智慧北京");
+
+        //隐藏菜单按钮
+        mImageButton.setVisibility(View.GONE);
 
     }
 }

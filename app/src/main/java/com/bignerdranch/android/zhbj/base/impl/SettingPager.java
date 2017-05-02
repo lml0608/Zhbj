@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.hardware.camera2.params.StreamConfigurationMap;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bignerdranch.android.zhbj.base.BasePager;
@@ -31,6 +32,9 @@ public class SettingPager extends BasePager {
         mFrameLayout.addView(view);
 
         mTextView.setText("设置");
+
+        //隐藏菜单按钮
+        mImageButton.setVisibility(View.GONE);
 
     }
 }

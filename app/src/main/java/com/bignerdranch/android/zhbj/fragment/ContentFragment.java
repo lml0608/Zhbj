@@ -5,6 +5,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioGroup;
 
 import com.bignerdranch.android.zhbj.R;
 import com.bignerdranch.android.zhbj.base.BasePager;
@@ -26,6 +27,7 @@ public class ContentFragment extends BaseFragment {
 
 
     private NoScrollViewPager mViewPager;
+    private RadioGroup mRadioGroup;
 
     private List<BasePager> mBasePagers;
 
@@ -34,6 +36,7 @@ public class ContentFragment extends BaseFragment {
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_content, null);
         mViewPager = (NoScrollViewPager) view.findViewById(R.id.vp_centent);
+        mRadioGroup = (RadioGroup)view.findViewById(R.id.rg_group);
 
 
         return view;
@@ -49,7 +52,72 @@ public class ContentFragment extends BaseFragment {
         mBasePagers.add(new GovAffairsPager(getActivity()));
         mBasePagers.add(new SettingPager(getActivity()));
 
+        //设置Adapter
         mViewPager.setAdapter(new ContentAdapter());
+
+        //设置导航标签监听事件
+
+        mRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+
+                    case R.id.rb_home:
+                        //切换到首页
+                        //mViewPager.setCurrentItem(0);
+                        mViewPager.setCurrentItem(0, false);//第2个参数表示是否有滑动动画
+                        break;
+                    case R.id.rb_news:
+                        //切换到新闻
+                        //mViewPager.setCurrentItem(1);
+                        mViewPager.setCurrentItem(1, false);
+                        break;
+                    case R.id.rb_smart:
+                        //切换到智慧服务
+                        //mViewPager.setCurrentItem(2);
+                        mViewPager.setCurrentItem(2, false);
+                        break;
+                    case R.id.rb_gov:
+                        //切换到政务
+                        //mViewPager.setCurrentItem(3);
+                        mViewPager.setCurrentItem(3, false);
+                        break;
+                    case R.id.rb_setting:
+                        //切换到设置
+                        //mViewPager.setCurrentItem(4);
+                        mViewPager.setCurrentItem(4, false);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+        //页面监听
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                //某个页面被选中，则加载数据
+                BasePager pager = mBasePagers.get(position);
+                pager.initData();
+
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+        //加载默认选中的页面数据（首页）
+        mBasePagers.get(0).initData();
+
     }
 
     class ContentAdapter extends PagerAdapter {
@@ -70,7 +138,8 @@ public class ContentFragment extends BaseFragment {
 
             BasePager pager = mBasePagers.get(position);
             View view = pager.mRootView;
-            pager.initData();
+            //pager.initData(); viewpager回默认加载下一页面（数据），为了节省流量和性能，不要在此处调用初始化数据方法
+            //只有页面被选中再加载数据
             container.addView(view);
             return view;
         }

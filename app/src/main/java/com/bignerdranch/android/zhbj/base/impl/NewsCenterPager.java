@@ -3,6 +3,7 @@ package com.bignerdranch.android.zhbj.base.impl;
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.bignerdranch.android.zhbj.base.BasePager;
@@ -27,6 +28,9 @@ public class NewsCenterPager extends BasePager {
         mFrameLayout.addView(view);
 
         mTextView.setText("新闻");
+
+        //显示菜单按钮
+        mImageButton.setVisibility(View.VISIBLE);
 
     }
 }
