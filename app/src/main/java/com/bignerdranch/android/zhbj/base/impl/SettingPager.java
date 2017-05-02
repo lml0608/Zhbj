@@ -30,7 +30,7 @@ public class SettingPager extends BasePager {
 
         mFrameLayout.addView(view);
 
-        Log.i(TAG, "你好评啊 啊啊啊啊");
+        mTextView.setText("设置");
 
     }
 }

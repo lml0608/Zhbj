@@ -26,5 +26,7 @@ public class SmartServicePager extends BasePager {
 
         mFrameLayout.addView(view);
 
+        mTextView.setText("生活");
+
     }
 }

@@ -26,5 +26,7 @@ public class GovAffairsPager extends BasePager {
 
         mFrameLayout.addView(view);
 
+        mTextView.setText("人口管理");
+
     }
 }

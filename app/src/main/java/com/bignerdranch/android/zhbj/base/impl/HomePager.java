@@ -28,5 +28,7 @@ public class HomePager extends BasePager {
 
         mFrameLayout.addView(view);
 
+        mTextView.setText("智慧北京");
+
     }
 }

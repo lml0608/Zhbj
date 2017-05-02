@@ -19,8 +19,8 @@ public class BasePager {
 
     public Activity mActivity;
 
-    private TextView mTextView;
-    private ImageButton mImageButton;
+    public TextView mTextView;
+    public ImageButton mImageButton;
     public FrameLayout mFrameLayout;
 
     public View mRootView;//当前页面的布局文件对象

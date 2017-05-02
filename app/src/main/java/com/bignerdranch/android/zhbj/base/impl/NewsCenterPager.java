@@ -26,5 +26,7 @@ public class NewsCenterPager extends BasePager {
 
         mFrameLayout.addView(view);
 
+        mTextView.setText("新闻");
+
     }
 }
