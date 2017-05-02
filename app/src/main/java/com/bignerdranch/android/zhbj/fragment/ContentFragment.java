@@ -13,6 +13,7 @@ import com.bignerdranch.android.zhbj.base.impl.HomePager;
 import com.bignerdranch.android.zhbj.base.impl.NewsCenterPager;
 import com.bignerdranch.android.zhbj.base.impl.SettingPager;
 import com.bignerdranch.android.zhbj.base.impl.SmartServicePager;
+import com.bignerdranch.android.zhbj.view.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,7 @@ import java.util.List;
 public class ContentFragment extends BaseFragment {
 
 
-    private ViewPager mViewPager;
+    private NoScrollViewPager mViewPager;
 
     private List<BasePager> mBasePagers;
 
@@ -32,7 +33,7 @@ public class ContentFragment extends BaseFragment {
     public View initView() {
 
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_content, null);
-        mViewPager = (ViewPager) view.findViewById(R.id.vp_centent);
+        mViewPager = (NoScrollViewPager) view.findViewById(R.id.vp_centent);
 
 
         return view;
