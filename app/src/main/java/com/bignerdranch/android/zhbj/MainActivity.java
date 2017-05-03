@@ -18,10 +18,15 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class MainActivity extends SlidingFragmentActivity {
 
     private static final String TAG = "MainActivity";
-    private SlidingMenu mSlidingMenu;
+    private static SlidingMenu mSlidingMenu;
 
     private static final String TAG_LEFT_MENU = "TAG_LEFT_MENU";
     private static final String TAG_CONTENT = "TAG_CONTENT";
+
+    public static void stop1() {
+        mSlidingMenu.toggle();
+    }
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

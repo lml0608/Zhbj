@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:background="#f00"
+              android:background="#000"
               android:layout_height="match_parent">
 
 
-    <TextView
+    <ListView
+        android:id="@+id/menu_list_view"
+        android:layout_marginTop="80dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="我是左侧滑动页面"/>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

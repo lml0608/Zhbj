@@ -135,7 +135,7 @@ public class NewsCenterPager extends BasePager{
         MainActivity mainUI = (MainActivity) mActivity;
         LeftMenuFragment fragment = mainUI.getLeftMenuFragment();
 
-
+        fragment.setMenuData(newsMenu.data);
     }
 
 }

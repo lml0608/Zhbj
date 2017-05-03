@@ -8,6 +8,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bignerdranch.android.zhbj.MainActivity;
 import com.bignerdranch.android.zhbj.R;
 
 /**
@@ -40,6 +41,13 @@ public class BasePager {
         mTextView = (TextView)view.findViewById(R.id.tv_title);
         mImageButton = (ImageButton)view.findViewById(R.id.btn_menu);
         mFrameLayout = (FrameLayout)view.findViewById(R.id.fl_content);
+
+        mImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity.stop1();
+            }
+        });
         return  view;
     }
 
