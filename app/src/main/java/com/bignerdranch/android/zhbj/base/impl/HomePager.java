@@ -30,6 +30,7 @@ public class HomePager extends BasePager {
 
         mFrameLayout.addView(view);
 
+        //标题title
         mTextView.setText("智慧北京");
 
         //隐藏菜单按钮

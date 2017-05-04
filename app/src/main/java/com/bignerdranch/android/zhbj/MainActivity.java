@@ -18,14 +18,11 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 public class MainActivity extends SlidingFragmentActivity {
 
     private static final String TAG = "MainActivity";
-    private static SlidingMenu mSlidingMenu;
+    private SlidingMenu mSlidingMenu;
 
     private static final String TAG_LEFT_MENU = "TAG_LEFT_MENU";
     private static final String TAG_CONTENT = "TAG_CONTENT";
 
-    public static void stop1() {
-        mSlidingMenu.toggle();
-    }
 
 
     @Override
@@ -42,7 +39,7 @@ public class MainActivity extends SlidingFragmentActivity {
         setBehindContentView(R.layout.left_menu);
         mSlidingMenu = getSlidingMenu();
         //触摸模式TOUCHMODE_FULLSCREEN 全屏,TOUCHMODE_MARGIN边界
-        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        mSlidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_MARGIN);
 
         mSlidingMenu.setBehindOffset(500);//屏幕预留500像素宽度
 

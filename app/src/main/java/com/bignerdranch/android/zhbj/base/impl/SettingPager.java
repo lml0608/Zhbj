@@ -31,6 +31,7 @@ public class SettingPager extends BasePager {
 
         mFrameLayout.addView(view);
 
+        //标题
         mTextView.setText("设置");
 
         //隐藏菜单按钮

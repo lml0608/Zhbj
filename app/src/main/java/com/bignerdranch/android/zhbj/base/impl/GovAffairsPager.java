@@ -27,6 +27,7 @@ public class GovAffairsPager extends BasePager {
 
         mFrameLayout.addView(view);
 
+        //标题
         mTextView.setText("人口管理");
 
         //显示菜单按钮

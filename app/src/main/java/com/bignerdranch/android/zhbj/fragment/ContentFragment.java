@@ -31,7 +31,7 @@ public class ContentFragment extends BaseFragment {
     private NoScrollViewPager mViewPager;
     private RadioGroup mRadioGroup;
 
-    private List<BasePager> mBasePagers;
+    private ArrayList<BasePager> mBasePagers;
 
     @Override
     public View initView() {
@@ -182,6 +182,13 @@ public class ContentFragment extends BaseFragment {
         public void destroyItem(ViewGroup container, int position, Object object) {
             container.removeView((View) object);
         }
+    }
+
+    //获取新闻中心页面
+
+    public NewsCenterPager getNewsCenterPager() {
+        NewsCenterPager pager = (NewsCenterPager) mBasePagers.get(1);
+        return pager;
     }
 
 }

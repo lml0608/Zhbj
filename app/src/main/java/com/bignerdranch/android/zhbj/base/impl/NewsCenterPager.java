@@ -14,7 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bignerdranch.android.zhbj.MainActivity;
+import com.bignerdranch.android.zhbj.base.BaseMenuDetailPager;
 import com.bignerdranch.android.zhbj.base.BasePager;
+import com.bignerdranch.android.zhbj.base.impl.menu.InteractMenuDetailPager;
+import com.bignerdranch.android.zhbj.base.impl.menu.NewsMenuDetailPager;
+import com.bignerdranch.android.zhbj.base.impl.menu.PhotoMenuDetailPager;
+import com.bignerdranch.android.zhbj.base.impl.menu.TopicMenuDetailPager;
 import com.bignerdranch.android.zhbj.domain.NewsMenu;
 import com.bignerdranch.android.zhbj.fragment.LeftMenuFragment;
 import com.bignerdranch.android.zhbj.utils.NetworkUtils;
@@ -22,6 +27,8 @@ import com.bignerdranch.android.zhbj.utils.OpenNewsJsonUtils;
 import com.bignerdranch.android.zhbj.utils.PrefUtils;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -32,6 +39,9 @@ import okhttp3.Response;
  */
 
 public class NewsCenterPager extends BasePager{
+    //菜单详情页集合
+    private List<BaseMenuDetailPager> mBaseMenuDetailPagers;
+    private NewsMenu mNewsMenu;
 
     public NewsCenterPager(Activity activity) {
         super(activity);
@@ -39,14 +49,15 @@ public class NewsCenterPager extends BasePager{
 
     @Override
     public void initData() {
-        TextView view = new TextView(mActivity);
-        view.setText("新闻");
-        view.setTextColor(Color.RED);
-        view.setTextSize(22);
-        view.setGravity(Gravity.CENTER);
+//        TextView view = new TextView(mActivity);
+//        view.setText("新闻");
+//        view.setTextColor(Color.RED);
+//        view.setTextSize(22);
+//        view.setGravity(Gravity.CENTER);
+//
+//        mFrameLayout.addView(view);
 
-        mFrameLayout.addView(view);
-
+        //标题
         mTextView.setText("新闻");
         Log.i("NewsCenterPager", "你好");
 
@@ -56,12 +67,12 @@ public class NewsCenterPager extends BasePager{
         //判断是否由缓存，如果由缓存就加载缓存，没有就网络请求
         String cache = PrefUtils.getCache(mActivity, NetworkUtils.CATEGORY_URL);
 
-        Log.i("NewsCenterPager", "cache=" + cache);
-        NewsMenu newsMenu = OpenNewsJsonUtils.handleNewsResponse(cache);
+        //Log.i("NewsCenterPager", "cache=" + cache);
+        //NewsMenu newsMenu = OpenNewsJsonUtils.handleNewsResponse(cache);
         if (!TextUtils.isEmpty(cache)) {
 
             //加载缓存
-            processData(newsMenu);
+            processData(cache);
 
         } else {
             //网络请求
@@ -81,20 +92,20 @@ public class NewsCenterPager extends BasePager{
         NetworkUtils.sendOkHttpRequest(NetworkUtils.CATEGORY_URL, new Callback() {
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, final Response response) throws IOException {
 
                 final String responseString = response.body().string();
                 Log.i("NewsCenterPager", "responseString=" + responseString);
 
-                final NewsMenu newsMenu = OpenNewsJsonUtils.handleNewsResponse(responseString);
-                Log.i("NewsCenterPager", "newsMenu=" + newsMenu);
-                Log.i("NewsCenterPager", String.valueOf("ok".equals(newsMenu.retcode)));
-                Log.i("NewsCenterPager", String.valueOf(newsMenu.retcode));
+//                final NewsMenu newsMenu = OpenNewsJsonUtils.handleNewsResponse(responseString);
+//                Log.i("NewsCenterPager", "newsMenu=" + newsMenu);
+//                Log.i("NewsCenterPager", String.valueOf("ok".equals(newsMenu.retcode)));
+//                Log.i("NewsCenterPager", String.valueOf(newsMenu.retcode));
 
                 mActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (newsMenu != null && (newsMenu.retcode) == 200) {
+                        if (response != null && response.isSuccessful()) {
 
                             //设置缓存
 
@@ -102,7 +113,7 @@ public class NewsCenterPager extends BasePager{
 
 
 
-                            processData(newsMenu);
+                            processData(responseString);
 
 
                         }
@@ -128,14 +139,44 @@ public class NewsCenterPager extends BasePager{
         });
     }
 
-    protected void processData(NewsMenu newsMenu) {
+    protected void processData(String responseString) {
 
-        Log.i("newMenu", "newsMenu" + newsMenu);
+        mNewsMenu = OpenNewsJsonUtils.handleNewsResponse(responseString);
+        Log.i("newMenu", "newsMenu" + mNewsMenu);
 
         MainActivity mainUI = (MainActivity) mActivity;
         LeftMenuFragment fragment = mainUI.getLeftMenuFragment();
 
-        fragment.setMenuData(newsMenu.data);
+        fragment.setMenuData(mNewsMenu.data);
+
+
+        mBaseMenuDetailPagers =  new ArrayList<>();
+
+        mBaseMenuDetailPagers.add(new NewsMenuDetailPager(mActivity, mNewsMenu.data.get(0).children));
+        mBaseMenuDetailPagers.add(new TopicMenuDetailPager(mActivity));
+        mBaseMenuDetailPagers.add(new PhotoMenuDetailPager(mActivity));
+        mBaseMenuDetailPagers.add(new InteractMenuDetailPager(mActivity));
+
+        setCurrentDetailPager(0);
+
+    }
+
+    public void setCurrentDetailPager(int position) {
+
+        //重新给framelayout添加内容
+        //当前选中页面
+
+        BaseMenuDetailPager baseMenuDetailPager = mBaseMenuDetailPagers.get(position);
+
+        View view = baseMenuDetailPager.mRootView;
+        //清除之前旧布局
+        mFrameLayout.removeAllViews();
+        mFrameLayout.addView(view);
+
+        mTextView.setText(mNewsMenu.data.get(position).title);
+
+        baseMenuDetailPager.initData();
+
     }
 
 }

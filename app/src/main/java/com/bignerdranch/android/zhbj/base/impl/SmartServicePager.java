@@ -27,6 +27,7 @@ public class SmartServicePager extends BasePager {
 
         mFrameLayout.addView(view);
 
+        //标题
         mTextView.setText("生活");
 
         //显示菜单按钮

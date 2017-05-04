@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bignerdranch.android.zhbj.MainActivity;
 import com.bignerdranch.android.zhbj.R;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 /**
  * 五个标签页的基类
@@ -45,10 +46,17 @@ public class BasePager {
         mImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MainActivity.stop1();
+                //打开关闭侧边栏
+                toggle();
             }
         });
         return  view;
+    }
+
+    private void toggle() {
+        MainActivity mainUI = (MainActivity) mActivity;
+        SlidingMenu slidingMenu = mainUI.getSlidingMenu();
+        slidingMenu.toggle();
     }
 
 
